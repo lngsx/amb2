@@ -68,13 +68,13 @@ gem install solargraph
 # The dnf packages freshness is... not great it almost expired. 🫠
 echo "▶ Cargo the rust packages, smooth like coconut oil... 🥥"
 cargo install \
-    fd-find \
     ripgrep \
     bat \
     oxker \
     supdock \
     cargo-binstall
 
+    # fd-find \
     # bottom \
     # gitui \
     # lsd \ Do it with dnf instead.
@@ -84,6 +84,12 @@ cargo install \
 echo "▶ Install yazi"
 sudo dnf copr enable lihaohong/yazi
 sudo dnf install yazi -y
+
+# Install its plugins. There is a plugins file, but I am not sure about the package versioning or how it works,
+# so I'll do it manually, by hand, like this.
+ya pkg add yazi-rs/plugins:full-border
+ya pack -a imsi32/yatline
+# End of yazi plugins.
 
 echo "▶ Install zed"
 curl -f https://zed.dev/install.sh | sh
