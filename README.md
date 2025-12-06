@@ -50,6 +50,9 @@ original [settings](https://gist.github.com/lngsx/d486ad4aba9e47170d3e5a271f483a
 ```bash
 gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 30
 gsettings set org.gnome.desktop.peripherals.keyboard delay 300
+
+gsettings set org.gnome.desktop.a11y.keyboard bouncekeys-enable true
+gsettings set org.gnome.desktop.a11y.keyboard bouncekeys-delay 56
 ```
 
 ## Gnome Settings
