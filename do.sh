@@ -19,7 +19,8 @@ sudo dnf install -y \
     vim \
     nnn \
     lsd \
-    gitui
+    gitui \
+    fd-find
 
 echo "▶ Install development tool groups"
 sudo dnf install -y @development-tools
@@ -33,8 +34,12 @@ echo "▶ Install C development tools and libraries group"
 sudo dnf install -y @c-development
 
 # I need this. YJIT need this.
-echo "▶ Install Rust toolchain"
-sudo dnf install -y rust cargo
+# echo "▶ Install Rust toolchain"
+# sudo dnf install -y rust cargo
+#
+# Do this instead as it provides the latest Rust and comes with toolchain management, and is
+# the official recommended installation method over distribution packages.
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # gitui on cargo need this.
 # https://github.com/extrawurst/gitui/issues/961#issuecomment-997928556
@@ -61,7 +66,12 @@ sudo dnf install -y \
 echo "▶ Install Go runtime"
 sudo dnf install -y golang
 
-# Dependencies for building foot, pgo mode.
+# Historical note:
+# Legacy foot build dependencies (foot is now in Fedora repos, so building from
+# source is no longer necessary). Keeping these installed because:
+# 1. They're small and don't hurt anything
+# 2. Useful for building other Wayland/graphics software
+# 3. cmake/meson are commonly needed build tools anyway
 echo "▶ Install foot build dependencies"
 sudo dnf install -y \
     meson \
@@ -143,6 +153,13 @@ echo "▶ Download and unarchive fonts file"
 if [ ! -f ~/.local/share/fonts/SauceCodeProNerdFont-Regular.ttf ]; then
     curl -L https://github.com/ryanoasis/nerd-fonts/releases/latest/download/SourceCodePro.tar.xz \
         | tar -xJ -C ~/.local/share/fonts
+
+    echo "▶ Refreshing font cache"
+    fc-cache -fv
+
+    echo "✓ Fonts installed and cache updated!"
+else
+    echo "✓ Font already installed"
 fi
 
 # ============================================================
